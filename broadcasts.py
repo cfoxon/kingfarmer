@@ -10,11 +10,9 @@ import reportBuilder
 print("Verifying Hive nodes...")
 nodelist = NodeList()
 nodelist.update_nodes()
-#nodes = nodelist.get_hive_nodes()
-nodes = ["https://hive.roelandp.nl", "https://hived.emre.sh", "https://api.openhive.network"]
-
+nodes = nodelist.get_hive_nodes()
 hive = Hive(node=nodes, nobroadcast=False)
-#hive = Hive(node="https://api.deathwing.me")
+hive.chain_params['chain_id'] = 'beeab0de00000000000000000000000000000000000000000000000000000000'
 blockchain = Blockchain(hive)
 
 def unlock_hive_wallet():
