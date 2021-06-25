@@ -188,7 +188,7 @@ def fungibles(account, symbols):
 
 def print_fungibles(account):
   bal_data = fungibles(account,["HKWATER","BUDS","MOTA"])
-  print("\n  HKWATER: " + bal_data['HKWATER']['balance'] + "   BUDS: " + bal_data['BUDS']['balance'] + "    MOTA: " + bal_data['MOTA']['balance'])
+  print("\n  HKWATER: " + bal_data['HKWATER']['balance'] + "   BUDS: " + bal_data['BUDS']['balance'] + "\n\n  MOTA: " + bal_data['MOTA']['balance'] + "    Staked MOTA: " + bal_data['MOTA']['stake'] + "    Unstaking MOTA: " + bal_data['MOTA']['pendingUnstake'])
 
 #water_dict = need_water("foxon", 0)
 #print(water_dict)
