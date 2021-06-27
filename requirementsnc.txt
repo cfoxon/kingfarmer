@@ -3,4 +3,4 @@ wheel
 click==7.1.2
 click-shell==1.0
 requests
-beem==0.24.21
+beem
