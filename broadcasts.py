@@ -154,7 +154,7 @@ def plant(plot_seed_dict, account):
       print(broadcast_tx)
     except Exception as e:
       print(e)
-      print(custom)
+      print(tx)
     planted += 1
     print("Planted " + str(planted) + " of " + str(total_to_plant) + ". Please wait...")
     time.sleep(3)
