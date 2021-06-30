@@ -2,10 +2,10 @@
 
 python client for hashkings
 
-1. pip (or pip3) install -r requirements.txt
+## 1. pip (or pip3) install -r requirements.txt
 to get dependencies
 
-2. configure wallet in Beem
+## 2. configure wallet in Beem
  - for help getting beem running on your platform, see the Beem repo: https://github.com/holgern/beem
  - once Beem is installed, start beempy
  - 1. `createwallet` to set an unlock password
@@ -14,7 +14,7 @@ to get dependencies
  - **OR**
  - - `addkey` and follow the prompts to add the posting key. Then `addkey` again to add the active key
 
-3. python (or python3) main.py
+## 3. python (or python3) main.py
 
 
  Option 1 will water all planted seeds at SPT: 0
@@ -30,7 +30,7 @@ to get dependencies
 
  Option 6 to change to a different account
 
-4. BONUS not in the menu yet and early but very usable: Water tower upgrader
+## 4. BONUS not in the menu yet and early but very usable: Water tower upgrader
   python or (python3) twrbuy.py
   
   Upgrade water towers in bulk. Choose the level, quantity, and max price
