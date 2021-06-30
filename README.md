@@ -17,15 +17,20 @@ to get dependencies
 3. python (or python3) main.py
 
 
-Option 1 will water all planted seeds at SPT: 0
-- if the player does not have enough water, watering will maximize for BUDS
+ Option 1 will water all planted seeds at SPT: 0
+ - if the player does not have enough water, watering will maximize for BUDS
 
-Option 2 will harvest all SPT: 0 with WATER: 0
+ Option 2 will harvest all SPT: 0 with WATER: 0
 
-Option 3 will plant the maximum number of seeds
+ Option 3 will plant the maximum number of seeds
 
-Option 4 shows a 7-day forecast
+ Option 4 shows a 7-day forecast
 
-Option 5 shows a refreshed summary
+ Option 5 shows a refreshed summary
 
-Option 6 to change to a different account
+ Option 6 to change to a different account
+
+4. BONUS not in the menu yet and early but very usable: Water tower upgrader
+  python or (python3) twrbuy.py
+  
+  Upgrade water towers in bulk. Choose the level, quantity, and max price
