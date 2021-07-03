@@ -2,8 +2,9 @@ import aiohttp
 import asyncio
 import math
 
-rpc = "https://engine.ryamer.com"
+rpc = "https://engine.rishipanthee.com"
 #rpc = "http://104.238.153.130:5000"
+
 endpoint_contract = "/contracts"
 headers = {'content-type': 'application/json'}
 
