@@ -41,7 +41,7 @@ def empty_plots(account):
   propquery['properties.TYPE'] = 'plot'
   propquery['properties.OCCUPIED'] = False
 
-  plots = engineApi.get_nft(850, propquery)
+  plots = engineApi.get_nft(5500, propquery)
 
   return plots
 
@@ -52,7 +52,7 @@ def unplanted_seedids_by_region(account):
 
   unplanted_seed_region = {}
 
-  all_seeds = engineApi.get_nft(2500, propquery)
+  all_seeds = engineApi.get_nft(5500, propquery)
   for result in all_seeds:
     for card in result:
       name = card['properties']['NAME']
@@ -125,7 +125,7 @@ def ready_to_harvest(account):
   propquery['properties.WATER'] = 0
   propquery['properties.PLANTED'] = True
 
-  cards = engineApi.get_nft(850, propquery)
+  cards = engineApi.get_nft(5500, propquery)
 
   seed_id_list = []
   for result in cards:
