@@ -2,8 +2,8 @@ import aiohttp
 import asyncio
 import math
 
-rpc = "https://ha.engine.rishipanthee.com"
-#rpc = "https://engine.rishipanthee.com"
+#rpc = "https://ha.engine.rishipanthee.com"
+rpc = "https://engine.rishipanthee.com"
 #rpc = "http://104.238.153.130:5000"
 
 endpoint_contract = "/contracts"
