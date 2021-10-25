@@ -8,8 +8,8 @@ from getpass import getpass
 import reportBuilder
 
 print("Verifying Hive nodes...")
-nodelist = NodeList()
-nodelist.update_nodes()
+#nodelist = NodeList()
+#nodelist.update_nodes()
 #nodes = nodelist.get_hive_nodes()
 nodes = ("https://api.deathwing.me")
 hive = Hive(node=nodes, nobroadcast=False)
@@ -153,9 +153,10 @@ def plant(plot_seed_dict, account):
     try:
       broadcast_tx = tx.broadcast()
       print(broadcast_tx)
+      #print(tx)
     except Exception as e:
       print(e)
-      print(tx)
+      #print(tx)
     planted += 1
     print("Planted " + str(planted) + " of " + str(total_to_plant) + ". Please wait...")
     time.sleep(3)

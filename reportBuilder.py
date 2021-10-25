@@ -41,7 +41,17 @@ def empty_plots(account):
   propquery['properties.TYPE'] = 'plot'
   propquery['properties.OCCUPIED'] = False
 
-  plots = engineApi.get_nft(5500, propquery)
+  owned = engineApi.get_nft(5500, propquery)
+
+  propquery = {}
+  propquery['properties.TYPE'] = "plot"
+  propquery['properties.RENTEDINFO'] = account
+  propquery['properties.RENTED'] = True
+  propquery['properties.OCCUPIED'] = False
+
+  rented = engineApi.get_nft(5500, propquery)
+
+  plots = owned + rented
 
   return plots
 
@@ -57,7 +67,10 @@ def unplanted_seedids_by_region(account):
     for card in result:
       name = card['properties']['NAME']
       if "PLANTED" not in card['properties']:
-        region = seed_region[name]
+        if name in seed_region:
+          region = seed_region[name]
+        else:
+          region = "unknown"
         card['properties']['REGION'] = region
         if region not in unplanted_seed_region:
           unplanted_seed_region[region] = []
@@ -86,6 +99,31 @@ def plantables(account):
       plotids_by_region[region] = plotids_by_region[region][ 0 : plantable ]
       region_plantable = dict(zip(plotids_by_region[region], seedids_by_region[region]))
     to_plant = {**to_plant, **region_plantable}
+
+  return to_plant
+
+def plantables_by_region(account):
+  seedids_by_region = unplanted_seedids_by_region(account)
+  plots = empty_plots(account)
+
+  plotids_by_region = {}
+  for result in plots:
+    for card in result:
+      name = card['properties']['NAME']
+      if name not in plotids_by_region:
+        plotids_by_region[name] = []
+      plotids_by_region[name].append(str(card['_id']))
+  to_plant = {}
+  for region in plotids_by_region:
+    region_plantable = {}
+
+    if region in seedids_by_region:
+      plantable = min(len(seedids_by_region[region]), len(plotids_by_region[region]))
+      seedids_by_region[region] = seedids_by_region[region][ 0 : plantable ]
+      plotids_by_region[region] = plotids_by_region[region][ 0 : plantable ]
+      region_plantable = dict(zip(plotids_by_region[region], seedids_by_region[region]))
+    #to_plant = {**to_plant, **region_plantable}
+    to_plant[region] = region_plantable
 
   return to_plant
 
@@ -178,17 +216,20 @@ def forecast(account,days):
 def fungibles(account, symbols):
   fungibles_data = engineApi.get_fungibles_balance(account, symbols)
   fungibles_dict = {}
+  for symbol in symbols:
+    fungibles_dict[symbol] = {'balance': "0", 'stake': "0", 'pendingUnstake': "0"}
   for result in fungibles_data:
-    symbol = result[0]['symbol']
-    fungibles_dict[symbol] = {}
-    fungibles_dict[symbol]['balance'] = result[0]['balance']
-    fungibles_dict[symbol]['stake'] = result[0]['stake']
-    fungibles_dict[symbol]['pendingUnstake'] = result[0]['pendingUnstake']
+    if len(result) > 0:
+      symbol = result[0]['symbol']
+      fungibles_dict[symbol] = {}
+      fungibles_dict[symbol]['balance'] = result[0]['balance']
+      fungibles_dict[symbol]['stake'] = result[0]['stake']
+      fungibles_dict[symbol]['pendingUnstake'] = result[0]['pendingUnstake']
   return fungibles_dict
 
 def print_fungibles(account):
   bal_data = fungibles(account,["HKWATER","BUDS","MOTA"])
-  print("\n  HKWATER: " + bal_data['HKWATER']['balance'] + "   BUDS: " + bal_data['BUDS']['balance'] + "\n\n  MOTA: " + bal_data['MOTA']['balance'] + "    Staked MOTA: " + bal_data['MOTA']['stake'] + "    Unstaking MOTA: " + bal_data['MOTA']['pendingUnstake'])
+  print("\n  HKWATER: " + bal_data['HKWATER']['balance'] + "   BUDS: " + bal_data['BUDS']['balance'] + "    MOTA: " + bal_data['MOTA']['balance'])
 
 #water_dict = need_water("foxon", 0)
 #print(water_dict)
