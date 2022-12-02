@@ -66,7 +66,7 @@ def unplanted_seedids_by_region(account):
   for result in all_seeds:
     for card in result:
       name = card['properties']['NAME']
-      if "PLANTED" not in card['properties']:
+      if "PLANTED" not in card['properties'] or card['properties']['PLANTED'] == False:
         if name in seed_region:
           region = seed_region[name]
         else:
